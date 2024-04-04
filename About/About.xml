@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ModMetaData>
+	<name>Arcane Technology 1.5</name>
+	<author>Ferris, Dametri, GwinnBleidd</author>
+	<supportedVersions>
+		<li>1.1</li>
+		<li>1.2</li>
+		<li>1.3</li>
+		<li>1.4</li>
+		<li>1.5</li>
+	</supportedVersions>
+	<packageId>dame.arcanetechnology</packageId>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld</downloadUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>Ludeon.RimWorld</li>
+		<li>Ludeon.RimWorld.Royalty</li>
+		<li>dame.techprinting</li>
+	</loadAfter>
+	<description>
+		Restrict weapon and armor usage until the technology has been researched
+		Fixed for Simple Sidearms/ArmorRacks,
+		If you want another mod to be added to the patch list for avoiding equipment feel free to dm me or add a comment I will aim to maintain this!
+	</description>
+</ModMetaData>
