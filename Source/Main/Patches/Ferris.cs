@@ -413,7 +413,7 @@ namespace DArcaneTechnology
                     if (_callback == null) return true;
                     try
                     {
-                        _callback.Invoke(new PatchCallbackResult.Success("Successfully patched " + BuildTargetMethodName(true, false) + " with " + BuildPatchMethodName(false) + (message.NullOrEmpty() ? "" : "\n" + message)));
+                        _callback.Invoke(new PatchCallbackResult.Success("Successfully patched " + BuildTargetMethodName(true, true) + " with " + BuildPatchMethodName(false) + (message.NullOrEmpty() ? "" : "\n" + message)));
                     }
                     catch
                     {
