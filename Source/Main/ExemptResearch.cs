@@ -11,6 +11,7 @@ public class ExemptResearch : PatchOperation
 
     protected override bool ApplyWorker(XmlDocument xml)
     {
+        if (Exemptions == null) return true;
         foreach (var item in Exemptions)
             if (!GearAssigner.exemptProjects.Contains(item))
                 GearAssigner.exemptProjects.Add(item);

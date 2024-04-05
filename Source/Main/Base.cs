@@ -67,8 +67,7 @@ public static class Base
                 var producedThingDef = recipeDef.ProducedThingDef;
                 if (producedThingDef.GetCompProperties<CompProperties_DArcane>() == null) producedThingDef.comps.Add(new CompProperties_DArcane(bestRPDForRecipe));
                 thingDic.SetOrAdd(producedThingDef, bestRPDForRecipe);
-                List<ThingDef> list;
-                if (researchDic.TryGetValue(bestRPDForRecipe, out list))
+                if (researchDic.TryGetValue(bestRPDForRecipe, out var list))
                     list.Add(producedThingDef);
                 else
                     researchDic.Add(bestRPDForRecipe, new List<ThingDef>

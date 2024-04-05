@@ -25,8 +25,14 @@
 		<li>dame.techprinting</li>
 	</loadAfter>
 	<description>
-		Restrict weapon and armor usage until the technology has been researched
-		Fixed for Simple Sidearms/ArmorRacks,
-		If you want another mod to be added to the patch list for avoiding equipment feel free to dm me or add a comment I will aim to maintain this!
+An Updated Version of ArcaneTechnology to 1.5 with several fixes
+
+Restrict weapon and armor usage until the technology has been researched!
+We recommend using this together with TechAdvancing and Semi Random Research for best results!
+
+Updated Compatability:
+- patches for SimpleSidearms 
+- patches for ArmorRacks equipment/weapons
+If you want another mod to be added to the patch list for avoiding equipment feel free to dm me or add a comment I will aim to maintain this!
 	</description>
 </ModMetaData>

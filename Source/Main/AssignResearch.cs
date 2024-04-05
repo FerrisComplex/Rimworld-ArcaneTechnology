@@ -11,6 +11,7 @@ public class AssignResearch : PatchOperation
 
     protected override bool ApplyWorker(XmlDocument xml)
     {
+        if (Assignments == null) return true;
         foreach (var assignment in Assignments) GearAssigner.hardAssignment.SetOrAdd(assignment.thingDef, assignment.researchDefName);
         return true;
     }
