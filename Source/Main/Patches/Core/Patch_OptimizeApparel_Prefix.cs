@@ -5,8 +5,6 @@ using Verse.AI;
 
 namespace DArcaneTechnology.CorePatches;
 
-[HarmonyPatch(typeof(JobGiver_OptimizeApparel))]
-[HarmonyPatch("TryGiveJob")]
 internal class Patch_OptimizeApparel_Prefix
 {
     public static bool Prefix(Pawn pawn, ref Job __result)

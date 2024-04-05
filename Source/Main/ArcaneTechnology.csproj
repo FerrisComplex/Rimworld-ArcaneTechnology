@@ -341,7 +341,6 @@
         <Compile Include="Base.cs"/>
         <Compile Include="CompDArcane.cs"/>
         <Compile Include="CompProperties_DArcane.cs"/>
-        <Compile Include="D.cs"/>
         <Compile Include="ExemptResearch.cs"/>
         <Compile Include="GearAssigner.cs"/>
         <Compile Include="Override.cs"/>
@@ -353,11 +352,11 @@
         <Compile Include="Patches\Core\Patch_FinishProject_Postfix.cs"/>
         <Compile Include="Patches\Core\Patch_OptimizeApparel_Prefix.cs"/>
         <Compile Include="Patches\Core\Patch_WeathWatcher_CalculateWeathItems_Transpiler.cs"/>
+        <Compile Include="Patches\Ferris.cs" />
         <Compile Include="Patches\HarmonyPatches.cs"/>
         <Compile Include="Patches\Patch_AllowedByBiocode_Postfix.cs"/>
         <Compile Include="Patches\Patch_BaseRackJob_Prefix.cs"/>
         <Compile Include="Patches\Patch_CanWearPostfix.cs"/>
-        <Compile Include="Patches\SimpleSidearms\PatchSimpleSidearmsBase.cs"/>
         <Compile Include="Patches\SimpleSidearms\Patch_isValidSidearm_Postfix.cs"/>
         <Compile Include="Specials\SpecialThingFilterWorker_DResearchedApparel.cs"/>
         <Compile Include="Specials\SpecialThingFilterWorker_DResearchedWeapons.cs"/>

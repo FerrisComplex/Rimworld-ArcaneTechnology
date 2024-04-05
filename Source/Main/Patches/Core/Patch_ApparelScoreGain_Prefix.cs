@@ -5,8 +5,6 @@ using Verse;
 
 namespace DArcaneTechnology.CorePatches;
 
-[HarmonyPatch(typeof(JobGiver_OptimizeApparel))]
-[HarmonyPatch("ApparelScoreGain")]
 internal class Patch_ApparelScoreGain_Prefix
 {
     public static bool Prefix(Pawn pawn, Apparel ap, List<float> wornScoresCache, ref float __result)

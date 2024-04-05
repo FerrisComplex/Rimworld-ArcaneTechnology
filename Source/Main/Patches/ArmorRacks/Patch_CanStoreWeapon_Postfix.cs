@@ -2,14 +2,13 @@
 using HarmonyLib;
 using Verse;
 
-namespace DArcaneTechnology.ArmorRackPatches;
-
-[HarmonyPatch(typeof(ArmorRack))]
-[HarmonyPatch("CanStoreWeapon")]
-internal class Patch_CanStoreWeapon_Postfix
+namespace DArcaneTechnology.ArmorRackPatches
 {
-    private static void Postfix(Thing weapon, ref bool __result)
+    internal class Patch_CanStoreWeapon_Postfix
     {
-        if (__result) __result = __result && !Base.IsResearchLocked(weapon.def);
+        private static void Postfix(Thing weapon, ref bool __result)
+        {
+            if (__result) __result = __result && !Base.IsResearchLocked(weapon.def);
+        }
     }
 }

@@ -7,8 +7,6 @@ using Verse;
 
 namespace DArcaneTechnology.CorePatches;
 
-[HarmonyPatch(typeof(WealthWatcher))]
-[HarmonyPatch("CalculateWealthItems")]
 public static class Patch_WealthWatcher_CalculateWealthItems_Transpiler
 {
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)

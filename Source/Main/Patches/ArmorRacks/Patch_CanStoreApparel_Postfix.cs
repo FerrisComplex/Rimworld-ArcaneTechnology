@@ -2,14 +2,14 @@
 using HarmonyLib;
 using RimWorld;
 
-namespace DArcaneTechnology.ArmorRackPatches;
-
-[HarmonyPatch(typeof(ArmorRack))]
-[HarmonyPatch("CanStoreApparel")]
-internal class Patch_CanStoreApparel_Postfix
+namespace DArcaneTechnology.ArmorRackPatches
 {
-    private static void Postfix(Apparel apparel, ref bool __result)
+    internal class Patch_CanStoreApparel_Postfix
     {
-        if (__result) __result = __result && !Base.IsResearchLocked(apparel.def);
+        private static void Postfix(Apparel apparel, ref bool __result)
+        {
+            if (__result) __result = __result && !Base.IsResearchLocked(apparel.def);
+        }
     }
+
 }
