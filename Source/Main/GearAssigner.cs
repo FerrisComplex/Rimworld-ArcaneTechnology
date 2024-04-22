@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DFerrisArcaneTech.Modules;
 using Verse;
 
 namespace DArcaneTechnology;
@@ -90,6 +91,6 @@ public static class GearAssigner
 
     public static bool ProjectIsExempt(ResearchProjectDef rpd)
     {
-        return ArcaneTechnologySettings.exemptClothing && exemptProjects.Contains(rpd.defName);
+        return TechnologyLevelSettings.ExemptClothing && exemptProjects.Contains(rpd.defName);
     }
 }

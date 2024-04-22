@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using DFerrisArcaneTech.Modules;
 using HarmonyLib;
 using RimWorld;
 using Verse;
@@ -36,7 +37,7 @@ public static class Patch_WealthWatcher_CalculateWealthItems_Transpiler
 
     public static void ExtraItemsFilter(ref List<Thing> tmpThings)
     {
-        if (ArcaneTechnologySettings.exemptFromWealthCalculation)
+        if (TechnologyLevelSettings.ExemptFromWealthCalculation)
         {
             var list = new List<Thing>();
             foreach (var thing in tmpThings)

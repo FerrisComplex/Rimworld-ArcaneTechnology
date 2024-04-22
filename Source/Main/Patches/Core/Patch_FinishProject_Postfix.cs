@@ -7,6 +7,6 @@ internal class Patch_FinishProject_Postfix
 {
     public static void Postfix()
     {
-        Base.playerTechLevel = Base.GetPlayerTech();
+        Base.PlayerTechLevel = Base.GetPlayerTech();
     }
 }

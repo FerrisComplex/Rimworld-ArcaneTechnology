@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DFerrisArcaneTech.Modules;
 using RimWorld;
 using Verse;
 
@@ -25,7 +26,7 @@ public static class Base
     }
 
 
-    public static TechLevel playerTechLevel
+    public static TechLevel PlayerTechLevel
     {
         get
         {
@@ -115,29 +116,30 @@ public static class Base
     }
 
 
-    public static bool InLockedTechRange(ResearchProjectDef rpd)
+    public static bool InLockedTechRange(TechLevel rpd)
     {
-        if (ArcaneTechnologySettings.restrictOnTechLevel) return rpd.techLevel > playerTechLevel + (byte)ArcaneTechnologySettings.howManyTechLevelsAheadOfYours;
-        return rpd.techLevel >= ArcaneTechnologySettings.minToRestrict;
+        if (rpd <= TechnologyLevelSettings.MinToRestrict) return false;
+        return  rpd > PlayerTechLevel + (byte)TechnologyLevelSettings.HowManyTechLevelsAheadOfYours;
     }
+    
 
 
-    public static bool Locked(ResearchProjectDef rpd)
+    public static bool Locked(ThingDef thing, ResearchProjectDef rpd)
     {
-        return rpd != null && DefDatabase<ResearchProjectDef>.AllDefs.Contains(rpd) && !GearAssigner.ProjectIsExempt(rpd) && InLockedTechRange(rpd) && (!rpd.IsFinished || ArcaneTechnologySettings.evenResearched);
+        var techLevel = thing != null && ArmorSettings.UpdateTechLevel(thing, out var level) && level != TechLevel.Undefined ? level : (rpd != null && !GearAssigner.ProjectIsExempt(rpd) && (!rpd.IsFinished || TechnologyLevelSettings.EvenResearched) ? rpd.techLevel : TechLevel.Undefined);
+        return InLockedTechRange(techLevel);
     }
 
 
     public static bool IsResearchLocked(ThingDef thingDef, Pawn pawn = null)
     {
-        ResearchProjectDef rpd;
-        return (pawn == null || pawn.IsColonist) && thingDic.TryGetValue(thingDef, out rpd) && Locked(rpd);
+        return (pawn == null || pawn.IsColonist) && thingDic.TryGetValue(thingDef, out var rpd) && Locked(thingDef, rpd);
     }
 
 
     public static TechLevel GetPlayerTech()
     {
-        if (ArcaneTechnologySettings.useHighestResearched)
+        if (TechnologyLevelSettings.UseHighestResearched)
         {
             for (var i = 7; i > 0; i--)
                 if (strataDic.ContainsKey((TechLevel)i))
@@ -151,7 +153,7 @@ public static class Base
             return TechLevel.Animal;
         }
 
-        if (ArcaneTechnologySettings.usePercentResearched)
+        if (TechnologyLevelSettings.UsePercentResearched)
         {
             var num = 0;
             for (var j = 7; j > 0; j--)
@@ -164,7 +166,7 @@ public static class Base
                                 num++;
                     }
 
-                    if (num / (float)strataDic[(TechLevel)j].Count >= ArcaneTechnologySettings.percentResearchNeeded) return (TechLevel)j;
+                    if (num / (float)strataDic[(TechLevel)j].Count >= TechnologyLevelSettings.PercentResearchNeeded) return (TechLevel)j;
                 }
 
             return TechLevel.Animal;

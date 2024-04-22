@@ -1,25 +1,28 @@
-﻿using UnityEngine;
+﻿using DFerrisArcaneTech;
+using UnityEngine;
 using Verse;
 
 namespace DArcaneTechnology;
 
 internal class ArcaneTechnologyMod : Mod
 {
-    private ArcaneTechnologySettings settings;
+    private Settings settings;
 
     public ArcaneTechnologyMod(ModContentPack content) : base(content)
     {
-        settings = GetSettings<ArcaneTechnologySettings>();
+        SettingsHelper.RegisterSettingModules();
+        settings = GetSettings<Settings>();
         LongEventHandler.QueueLongEvent(Base.Initialize, "DArcaneTech.BuildingDatabase", false, null);
+        LongEventHandler.QueueLongEvent(SettingsHelper.OnGameInitialization, "DArcaneTech.OnGameInit", false, null);
     }
 
 
+        
     public override void DoSettingsWindowContents(Rect inRect)
     {
-        ArcaneTechnologySettings.DrawSettings(inRect);
+        Settings.DrawSettings(inRect);
         base.DoSettingsWindowContents(inRect);
     }
-
 
     public override string SettingsCategory()
     {
@@ -29,7 +32,12 @@ internal class ArcaneTechnologyMod : Mod
 
     public override void WriteSettings()
     {
-        ArcaneTechnologySettings.WriteAll();
+        foreach (var allCategory in SettingsHelper.AllCategories)
+            allCategory.OnPreSave();
+        foreach (var allCategory in SettingsHelper.AllCategories)
+            allCategory.OnDoSave();
         base.WriteSettings();
+        foreach (var allCategory in SettingsHelper.AllCategories)
+            allCategory.OnPostSave();
     }
 }

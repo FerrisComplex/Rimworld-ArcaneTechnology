@@ -335,7 +335,6 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="ArcaneTechnologyMod.cs"/>
-        <Compile Include="ArcaneTechnologySettings.cs"/>
         <Compile Include="Assignment.cs"/>
         <Compile Include="AssignResearch.cs"/>
         <Compile Include="Base.cs"/>
@@ -350,6 +349,7 @@
         <Compile Include="Patches\Core\Patch_ApparelScoreGain_Prefix.cs"/>
         <Compile Include="Patches\Core\Patch_CanEquip_Postfix.cs"/>
         <Compile Include="Patches\Core\Patch_FinishProject_Postfix.cs"/>
+        <Compile Include="Patches\Core\Patch_OnInit.cs" />
         <Compile Include="Patches\Core\Patch_OptimizeApparel_Prefix.cs"/>
         <Compile Include="Patches\Core\Patch_WeathWatcher_CalculateWeathItems_Transpiler.cs"/>
         <Compile Include="Patches\Ferris.cs" />
@@ -358,6 +358,22 @@
         <Compile Include="Patches\Patch_BaseRackJob_Prefix.cs"/>
         <Compile Include="Patches\Patch_CanWearPostfix.cs"/>
         <Compile Include="Patches\SimpleSidearms\Patch_isValidSidearm_Postfix.cs"/>
+        <Compile Include="Settings\Base\Categories\CategoryDef.cs" />
+        <Compile Include="Settings\Base\Compatability\RequirementData.cs" />
+        <Compile Include="Settings\Base\Dialog_ColorPicker.cs" />
+        <Compile Include="Settings\Base\EnhancedListingStandard.cs" />
+        <Compile Include="Settings\Base\HSV.cs" />
+        <Compile Include="Settings\Base\ModuleUtils.cs" />
+        <Compile Include="Settings\Base\Module\SettingModuleExtensions.cs" />
+        <Compile Include="Settings\Base\Module\SettingsModuleBase.cs" />
+        <Compile Include="Settings\Base\Sections\SectionDef.cs" />
+        <Compile Include="Settings\Base\Sections\SubSectionDef.cs" />
+        <Compile Include="Settings\Base\SettingsUtils.cs" />
+        <Compile Include="Settings\Modules\ArmorSettings.cs" />
+        <Compile Include="Settings\Modules\WeaponSettings.cs" />
+        <Compile Include="Settings\Modules\TechnologyLevelSettings.cs" />
+        <Compile Include="Settings\Settings.cs" />
+        <Compile Include="Settings\SettingsHelper.cs" />
         <Compile Include="Specials\SpecialThingFilterWorker_DResearchedApparel.cs"/>
         <Compile Include="Specials\SpecialThingFilterWorker_DResearchedWeapons.cs"/>
         <Compile Include="Specials\SpecialThingFilterWorker_DUnresearchedApparel.cs"/>
