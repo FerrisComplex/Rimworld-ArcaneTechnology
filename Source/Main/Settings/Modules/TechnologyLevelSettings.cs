@@ -138,12 +138,32 @@ public class TechnologyLevelSettings : CategoryDef
     }
     
     public override void OnMapInitialization()
-    {
-        if (Current.Game != null && !UseHighestResearched)
-            Base.PlayerTechLevel = Base.GetPlayerTech();
-        this.weaponSettings.OnMapInitialization();
-        this.armorSettings.OnMapInitialization();
-    }
+         {
+             // Looping queue to ensure our techlevel is correct
+             if (!hasQueued)
+             {
+                 hasQueued = true;
+                 TechnologyQueueSetup();
+             }
+             
+             // Add a delay to loading the techlevel to allow for techadvancing to actually set the tech level first
+             Ferris.QueueHelper.AddAction(() =>
+             {
+                 if (Current.Game != null && !UseHighestResearched) Base.PlayerTechLevel = Base.GetPlayerTech();
+             }, 60);
+             
+             
+             
+             this.weaponSettings.OnMapInitialization();
+             this.armorSettings.OnMapInitialization();
+         }
+     
+         private static bool hasQueued = false;
+         private static void TechnologyQueueSetup()
+         {
+             if (Current.Game != null && UseActualTechLevel) Base.PlayerTechLevel = Base.GetPlayerTech();
+             Ferris.QueueHelper.AddAction(TechnologyQueueSetup, 2500);
+         }
     
     public override void OnExposeData()
     {

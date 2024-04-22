@@ -20,7 +20,6 @@ namespace DArcaneTechnology
 
         private void PatchVanillaRimworld(Harmony harmony)
         {
-            Patch_OnInit.RegisterPatches();
             Ferris.PatchHelper.RegisterPatch(typeof(EquipmentUtility), "CanEquip", new[] { typeof(Thing), typeof(Pawn), typeof(string).MakeByRefType(), typeof(bool) }, Ferris.PatchHelper.PatchTarget.PatchType.Postfix, typeof(Patch_CanEquip_Postfix), "Postfix", new[] { typeof(Thing), typeof(Pawn), typeof(string).MakeByRefType(), typeof(bool).MakeByRefType() });
             Ferris.PatchHelper.RegisterPatch(typeof(JobGiver_OptimizeApparel), "ApparelScoreGain", null, Ferris.PatchHelper.PatchTarget.PatchType.Prefix, typeof(Patch_ApparelScoreGain_Prefix), "Prefix");
             Ferris.PatchHelper.RegisterPatch(typeof(JobGiver_OptimizeApparel), "TryGiveJob", null, Ferris.PatchHelper.PatchTarget.PatchType.Prefix, typeof(Patch_OptimizeApparel_Prefix), "Prefix");
