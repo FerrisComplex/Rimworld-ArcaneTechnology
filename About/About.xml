@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ModMetaData>
-	<name>Arcane Technology 1.5</name>
+	<name>Arcane Technology Reborn</name>
 	<author>Ferris, Dametri, GwinnBleidd</author>
 	<supportedVersions>
 		<li>1.1</li>
@@ -25,14 +25,23 @@
 		<li>dame.techprinting</li>
 	</loadAfter>
 	<description>
-An Updated Version of ArcaneTechnology to 1.5 with several fixes
+A Rewritten version of arcane technology
 
 Restrict weapon and armor usage until the technology has been researched!
-We recommend using this together with TechAdvancing and Semi Random Research for best results!
+We recommend using this together with Tech Advancing Reborn and Semi Random Research for best results!
+
+New Features:
+- Configurable Tech level per weapon/armor
+- Much much better identifier for "Clothing" technology to avoid cosmetic items
 
 Updated Compatability:
-- patches for SimpleSidearms 
-- patches for ArmorRacks equipment/weapons
+- Fixed patches for SimpleSidearms 
+- Fixed patches for ArmorRacks equipment/weapons
 If you want another mod to be added to the patch list for avoiding equipment feel free to dm me or add a comment I will aim to maintain this!
+
+Notes:
+- Package ID will not be changed, im keeping with the original to allow compatability with old patches
+
+Original mod: https://steamcommunity.com/sharedfiles/filedetails/?id=2554469600
 	</description>
 </ModMetaData>

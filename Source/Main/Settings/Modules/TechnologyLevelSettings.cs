@@ -139,6 +139,8 @@ public class TechnologyLevelSettings : CategoryDef
     
     public override void OnMapInitialization()
     {
+        if (Current.Game != null && !UseHighestResearched)
+            Base.PlayerTechLevel = Base.GetPlayerTech();
         this.weaponSettings.OnMapInitialization();
         this.armorSettings.OnMapInitialization();
     }

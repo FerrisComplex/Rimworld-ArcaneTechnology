@@ -126,7 +126,7 @@ public static class Base
 
     public static bool Locked(ThingDef thing, ResearchProjectDef rpd)
     {
-        var techLevel = thing != null && ArmorSettings.UpdateTechLevel(thing, out var level) && level != TechLevel.Undefined ? level : (rpd != null && !GearAssigner.ProjectIsExempt(rpd) && (!rpd.IsFinished || TechnologyLevelSettings.EvenResearched) ? rpd.techLevel : TechLevel.Undefined);
+        var techLevel = thing != null && ArmorSettings.UpdateTechLevel(thing, out var level) ? level : (rpd != null && !GearAssigner.ProjectIsExempt(rpd) && (!rpd.IsFinished || TechnologyLevelSettings.EvenResearched) ? rpd.techLevel : TechLevel.Undefined);
         return InLockedTechRange(techLevel);
     }
 
