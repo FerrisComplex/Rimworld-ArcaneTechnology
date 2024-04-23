@@ -9,8 +9,13 @@ namespace DFerrisArcaneTech.Modules;
 
 public class WeaponSettings : SettingsModuleBase
 {
-    private static readonly Dictionary<string, int> ManualRequirements = new Dictionary<string, int>();
+    private static WeaponSettings settings;
+    private Dictionary<string, int> ManualRequirements = new Dictionary<string, int>();
 
+    public WeaponSettings()
+    {
+        settings = this;
+    }
 
     public static bool ModifyTechLevels = false;
     public static bool ModifiesRealTechLevels = false;
@@ -21,7 +26,7 @@ public class WeaponSettings : SettingsModuleBase
     
     public static bool UpdateTechLevel(ThingDef item, out TechLevel level)
     {
-        if (ManualRequirements.TryGetValue(item.defName, out var value) && value >= 0 && value <= 7)
+        if (settings != null && settings.ManualRequirements.TryGetValue(item.defName, out var value) && value >= 0 && value <= 7)
         {
             level = (TechLevel)value;
             return true;
@@ -157,12 +162,7 @@ public class WeaponSettings : SettingsModuleBase
     {
         Look(ref ModifiesRealTechLevels, "ModifiesRealTechLevels", true);
         Look(ref ModifyTechLevels, "ModifyTechLevels", false);
-        foreach (var v in DefDatabase<ResearchProjectDef>.AllDefs)
-        {
-            var reference = ManualRequirements.TryGetValue(v.defName, -1);
-            Look(ref reference, v.defName, -1);
-            if (reference != -1)
-                ManualRequirements.SetOrAdd(v.defName, reference);
-        }
+        Look(ref ManualRequirements, "ManualRequirements", new Dictionary<string, int>());
+        ManualRequirements.RemoveAll(x => x.Value == 128 || x.Value == -1);
     }
 }

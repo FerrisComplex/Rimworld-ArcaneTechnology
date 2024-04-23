@@ -10,8 +10,13 @@ namespace DFerrisArcaneTech.Modules;
 
 public class ArmorSettings : SettingsModuleBase
 {
-    private static readonly Dictionary<string, int> ManualRequirements = new Dictionary<string, int>();
+    private static ArmorSettings settings;
+    private Dictionary<string, int> ManualRequirements = new Dictionary<string, int>();
 
+    public ArmorSettings()
+    {
+        settings = this;
+    }
 
     public static bool ModifyTechLevels = false;
     public static bool ModifiesRealTechLevels = false;
@@ -84,7 +89,7 @@ public class ArmorSettings : SettingsModuleBase
 
     public static bool UpdateTechLevel(ThingDef item, out TechLevel level, bool returnClothingValue = false)
     {
-        if (ManualRequirements.TryGetValue(item.defName, out var value))
+        if (settings != null && settings.ManualRequirements.TryGetValue(item.defName, out var value))
         {
             if (value == CLOTHING_VALUE_TECH_LEVEL && TechnologyLevelSettings.ExemptClothing)
             {
@@ -242,12 +247,7 @@ public class ArmorSettings : SettingsModuleBase
     public override void OnExposeData()
     {
         Look(ref ModifyTechLevels, "ModifyTechLevels", true);
-        foreach (var v in DefDatabase<ResearchProjectDef>.AllDefs)
-        {
-            var reference = ManualRequirements.TryGetValue(v.defName, -1);
-            Look(ref reference, v.defName, -1);
-            if (reference != -1)
-                ManualRequirements.SetOrAdd(v.defName, reference);
-        }
+        Look(ref ManualRequirements, "ManualRequirements", new Dictionary<string, int>());
+        ManualRequirements.RemoveAll(x => x.Value == 128 || x.Value == -1);
     }
 }
