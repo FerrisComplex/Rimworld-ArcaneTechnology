@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DArcaneTechnology;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -162,16 +163,6 @@ public class WeaponSettings : SettingsModuleBase
     {
         Look(ref ModifiesRealTechLevels, "ModifiesRealTechLevels", true);
         Look(ref ModifyTechLevels, "ModifyTechLevels", false);
-        
-        foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsWeapon || x.IsMeleeWeapon || x.IsRangedWeapon).OrderBy(x => x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1).ThenBy(x => x.IsRangedWeapon ? 0 : 1).ThenBy(x => x.IsMeleeWeapon ? 0 : 1))
-        {
-            var value = ManualRequirements.TryGetValue(v.defName, out var valueResult) ? valueResult : -999;
-            Look(ref value, "ManualRequirements." + v.defName, -999);
-            if (value == -999)
-                ManualRequirements.Remove(v.defName);
-            else
-                ManualRequirements.SetOrAdd(v.defName, value);
-        }
-        
+        LookDictionary(ref ManualRequirements, "ManualRequirements");
     }
 }
