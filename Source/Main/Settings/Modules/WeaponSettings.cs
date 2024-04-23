@@ -101,7 +101,7 @@ public class WeaponSettings : SettingsModuleBase
             
             float buttonSize = Text.CalcSize("No Technology Level (Default)").x + 15;
 
-            foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsWeapon || x.IsMeleeWeapon || x.IsRangedWeapon).OrderBy(x => x != null && x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x != null && x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x != null && x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1).ThenBy(x => x.IsRangedWeapon ? 0 : 1).ThenBy(x => x.IsMeleeWeapon ? 0 : 1))
+            foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsWeapon || x.IsMeleeWeapon || x.IsRangedWeapon).OrderBy(x => x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1).ThenBy(x => x.IsRangedWeapon ? 0 : 1).ThenBy(x => x.IsMeleeWeapon ? 0 : 1))
             {
                 if (v == null) continue;
                 if (v.modContentPack == null)
@@ -162,7 +162,16 @@ public class WeaponSettings : SettingsModuleBase
     {
         Look(ref ModifiesRealTechLevels, "ModifiesRealTechLevels", true);
         Look(ref ModifyTechLevels, "ModifyTechLevels", false);
-        Look(ref ManualRequirements, "ManualRequirements", new Dictionary<string, int>());
-        ManualRequirements.RemoveAll(x => x.Value == 128 || x.Value == -1);
+        
+        foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsWeapon || x.IsMeleeWeapon || x.IsRangedWeapon).OrderBy(x => x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1).ThenBy(x => x.IsRangedWeapon ? 0 : 1).ThenBy(x => x.IsMeleeWeapon ? 0 : 1))
+        {
+            var value = ManualRequirements.TryGetValue(v.defName, out var valueResult) ? valueResult : -999;
+            Look(ref value, "ManualRequirements." + v.defName, value);
+            if (value == -999)
+                ManualRequirements.Remove(v.defName);
+            else
+                ManualRequirements.SetOrAdd(v.defName, value);
+        }
+        
     }
 }

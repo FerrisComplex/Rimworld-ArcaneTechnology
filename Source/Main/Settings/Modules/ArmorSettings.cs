@@ -186,7 +186,7 @@ public class ArmorSettings : SettingsModuleBase
 
             float buttonSize = Text.CalcSize("Industrial (Default)").x + 15;
 
-            foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsApparel && x.apparel != null).OrderBy(x => x != null && x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x != null && x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x != null && x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1))
+            foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsApparel && x.apparel != null).OrderBy(x => x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1))
             {
                 if (v == null) continue;
                 if (v.modContentPack == null)
@@ -247,7 +247,16 @@ public class ArmorSettings : SettingsModuleBase
     public override void OnExposeData()
     {
         Look(ref ModifyTechLevels, "ModifyTechLevels", true);
-        Look(ref ManualRequirements, "ManualRequirements", new Dictionary<string, int>());
-        ManualRequirements.RemoveAll(x => x.Value == 128 || x.Value == -1);
+        
+        foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsApparel && x.apparel != null).OrderBy(x => x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1))
+        {
+            var value = ManualRequirements.TryGetValue(v.defName, out var valueResult) ? valueResult : -999;
+            Look(ref value, "ManualRequirements." + v.defName, value);
+            if (value == -999)
+                ManualRequirements.Remove(v.defName);
+            else
+                ManualRequirements.SetOrAdd(v.defName, value);
+        }
+        
     }
 }
