@@ -89,7 +89,7 @@ public class ArmorSettings : SettingsModuleBase
 
     public static bool UpdateTechLevel(ThingDef item, out TechLevel level, bool returnClothingValue = false)
     {
-        if (settings != null && settings.ManualRequirements.TryGetValue(item.defName, out var value))
+        if (ModifyTechLevels && settings != null && settings.ManualRequirements.TryGetValue(item.defName, out var value))
         {
             if (value == CLOTHING_VALUE_TECH_LEVEL && TechnologyLevelSettings.ExemptClothing)
             {
@@ -104,7 +104,7 @@ public class ArmorSettings : SettingsModuleBase
             }
         }
 
-        if (TechnologyLevelSettings.UseInternalClothingCalc && clothingValuesInternal.Contains(item.defName))
+        if (ModifyTechLevels && TechnologyLevelSettings.UseInternalClothingCalc && clothingValuesInternal.Contains(item.defName))
         {
             level = returnClothingValue ? (TechLevel)CLOTHING_VALUE_TECH_LEVEL : TechLevel.Undefined;
             return true;
@@ -251,7 +251,7 @@ public class ArmorSettings : SettingsModuleBase
         foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsApparel && x.apparel != null).OrderBy(x => x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1))
         {
             var value = ManualRequirements.TryGetValue(v.defName, out var valueResult) ? valueResult : -999;
-            Look(ref value, "ManualRequirements." + v.defName, value);
+            Look(ref value, "ManualRequirements." + v.defName, -999);
             if (value == -999)
                 ManualRequirements.Remove(v.defName);
             else

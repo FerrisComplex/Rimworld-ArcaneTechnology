@@ -26,7 +26,7 @@ public class WeaponSettings : SettingsModuleBase
     
     public static bool UpdateTechLevel(ThingDef item, out TechLevel level)
     {
-        if (settings != null && settings.ManualRequirements.TryGetValue(item.defName, out var value) && value >= 0 && value <= 7)
+        if (ModifyTechLevels && settings != null && settings.ManualRequirements.TryGetValue(item.defName, out var value) && value >= 0 && value <= 7)
         {
             level = (TechLevel)value;
             return true;
@@ -166,7 +166,7 @@ public class WeaponSettings : SettingsModuleBase
         foreach (var v in DefDatabase<ThingDef>.AllDefs.Where(x => x.IsWeapon || x.IsMeleeWeapon || x.IsRangedWeapon).OrderBy(x => x.modContentPack != null && x.modContentPack.IsCoreMod ? 0 : 1).ThenBy(x => x.modContentPack != null && x.modContentPack.IsOfficialMod ? 0 : 1).ThenBy(x => x.modContentPack != null ? x.modContentPack.loadOrder : int.MaxValue - 1).ThenBy(x => x.IsRangedWeapon ? 0 : 1).ThenBy(x => x.IsMeleeWeapon ? 0 : 1))
         {
             var value = ManualRequirements.TryGetValue(v.defName, out var valueResult) ? valueResult : -999;
-            Look(ref value, "ManualRequirements." + v.defName, value);
+            Look(ref value, "ManualRequirements." + v.defName, -999);
             if (value == -999)
                 ManualRequirements.Remove(v.defName);
             else
