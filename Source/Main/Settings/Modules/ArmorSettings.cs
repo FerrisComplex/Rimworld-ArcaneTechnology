@@ -142,10 +142,10 @@ public class ArmorSettings : SettingsModuleBase
         {
             List<FloatMenuOption> list = new List<FloatMenuOption>();
 
-            list.Add(new FloatMenuOption(GetTechLevelName(CLOTHING_VALUE_TECH_LEVEL) + (value == defaultValue ? " (Default)" : ""), () => action.Invoke(((TechLevel)CLOTHING_VALUE_TECH_LEVEL == defaultValue) ? (TechLevel)128 : (TechLevel)CLOTHING_VALUE_TECH_LEVEL), MenuOptionPriority.Default, null, null, 0f, null, null, true, 0));
+            list.Add(new FloatMenuOption(GetTechLevelName(CLOTHING_VALUE_TECH_LEVEL) + ((TechLevel)CLOTHING_VALUE_TECH_LEVEL == defaultValue ? " (Default)" : ""), () => action.Invoke(((TechLevel)CLOTHING_VALUE_TECH_LEVEL == defaultValue) ? (TechLevel)128 : (TechLevel)CLOTHING_VALUE_TECH_LEVEL), MenuOptionPriority.Default, null, null, 0f, null, null, true, 0));
 
             foreach (var enumValue in Enum.GetValues(typeof(TechLevel)))
-                list.Add(new FloatMenuOption(GetTechLevelName((TechLevel)enumValue) + (value == defaultValue ? " (Default)" : ""), () => action.Invoke(((TechLevel)enumValue == defaultValue) ? (TechLevel)128 : (TechLevel)enumValue), MenuOptionPriority.Default, null, null, 0f, null, null, true, 0));
+                list.Add(new FloatMenuOption(GetTechLevelName((TechLevel)enumValue) + ((TechLevel)enumValue == defaultValue ? " (Default)" : ""), () => action.Invoke(((TechLevel)enumValue == defaultValue) ? (TechLevel)128 : (TechLevel)enumValue), MenuOptionPriority.Default, null, null, 0f, null, null, true, 0));
             Find.WindowStack.Add(new FloatMenu(list));
         }
 

@@ -60,7 +60,7 @@ public class WeaponSettings : SettingsModuleBase
         {
             List<FloatMenuOption> list = new List<FloatMenuOption>();
             foreach (var enumValue in Enum.GetValues(typeof(TechLevel)))
-                list.Add(new FloatMenuOption(ArmorSettings.GetTechLevelName((TechLevel)enumValue) + (value == defaultValue ? " (Default)" : ""), () => action.Invoke( ((TechLevel)enumValue == defaultValue) ? (TechLevel)128 : (TechLevel)enumValue), MenuOptionPriority.Default, null, null, 0f, null, null, true, 0));
+                list.Add(new FloatMenuOption(ArmorSettings.GetTechLevelName((TechLevel)enumValue) + ((TechLevel)enumValue == defaultValue ? " (Default)" : ""), () => action.Invoke( ((TechLevel)enumValue == defaultValue) ? (TechLevel)128 : (TechLevel)enumValue), MenuOptionPriority.Default, null, null, 0f, null, null, true, 0));
             Find.WindowStack.Add(new FloatMenu(list));
         }
 
